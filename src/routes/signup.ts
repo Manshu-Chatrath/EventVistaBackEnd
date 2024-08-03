@@ -16,7 +16,7 @@ const validateReq = [
     .isLength({ min: 5, max: 20 })
     .withMessage("Username must be atleast 5 characters long"),
   body("email").isEmail().withMessage("Enter a valid email address"),
-  body("email").normalizeEmail(),
+
   body("password")
     .isLength({ min: 6 })
     .withMessage("Password must be at least 6 characters long")

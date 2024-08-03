@@ -112,6 +112,7 @@ router.post("/cancelEvent/:id", isAuth, async (req: MyRequest, res) => {
 
 router.get("/client/allEvents", isAuth, async (req: MyRequest, res) => {
   try {
+    console.log("here");
     const index = Number(req.query.index) || 0;
     const count = Number(req.query.count) || 10;
     const search = req.query.search || "";
@@ -137,7 +138,7 @@ router.get("/client/allEvents", isAuth, async (req: MyRequest, res) => {
           {
             id: {
               [Op.notIn]: Sequelize.literal(
-                `(SELECT eventId FROM Clients_has_Events WHERE clientId = ${req.userId})`
+                `(SELECT eventId FROM clients_has_events WHERE clientId = ${req.userId})`
               ),
             },
             title: {
@@ -160,7 +161,7 @@ router.get("/client/allEvents", isAuth, async (req: MyRequest, res) => {
           {
             id: {
               [Op.notIn]: Sequelize.literal(
-                `(SELECT eventId FROM Clients_has_Events WHERE clientId = ${req.userId})`
+                `(SELECT eventId FROM clients_has_events WHERE clientId = ${req.userId})`
               ),
             },
             title: {
@@ -178,9 +179,12 @@ router.get("/client/allEvents", isAuth, async (req: MyRequest, res) => {
       offset: index,
       limit: count,
     });
-
-    res.status(200).send({ events: events, totalLength: totalEvents });
-  } catch (e) {}
+    console.log("Here");
+    return res.status(200).send({ events: events, totalLength: totalEvents });
+  } catch (e) {
+    console.log(e);
+    dataBaseConnectionError(res);
+  }
 });
 
 router.get(
@@ -202,7 +206,7 @@ router.get(
                 cancel: { [Op.not]: true },
                 id: {
                   [Op.in]: Sequelize.literal(
-                    `(SELECT eventId FROM Clients_has_Events WHERE clientId = ${req.userId})`
+                    `(SELECT eventId FROM clients_has_events WHERE clientId = ${req.userId})`
                   ),
                 },
               },
@@ -227,7 +231,7 @@ router.get(
               {
                 id: {
                   [Op.in]: Sequelize.literal(
-                    `(SELECT eventId FROM Clients_has_Events WHERE clientId = ${req.userId})`
+                    `(SELECT eventId FROM clients_has_events WHERE clientId = ${req.userId})`
                   ),
                 },
               },
@@ -255,7 +259,7 @@ router.get(
               {
                 id: {
                   [Op.in]: Sequelize.literal(
-                    `(SELECT eventId FROM Clients_has_Events WHERE clientId = ${req.userId})`
+                    `(SELECT eventId FROM clients_has_events WHERE clientId = ${req.userId})`
                   ),
                 },
               },
@@ -280,7 +284,7 @@ router.get(
               {
                 id: {
                   [Op.in]: Sequelize.literal(
-                    `(SELECT eventId FROM Clients_has_Events WHERE clientId = ${req.userId})`
+                    `(SELECT eventId FROM clients_has_events WHERE clientId = ${req.userId})`
                   ),
                 },
               },
@@ -308,7 +312,7 @@ router.get(
               {
                 id: {
                   [Op.in]: Sequelize.literal(
-                    `(SELECT eventId FROM Clients_has_Events WHERE clientId = ${req.userId})`
+                    `(SELECT eventId FROM clients_has_events WHERE clientId = ${req.userId})`
                   ),
                 },
               },
@@ -338,7 +342,7 @@ router.get(
               {
                 id: {
                   [Op.in]: Sequelize.literal(
-                    `(SELECT eventId FROM Clients_has_Events WHERE clientId = ${req.userId})`
+                    `(SELECT eventId FROM clients_has_events WHERE clientId = ${req.userId})`
                   ),
                 },
               },

@@ -78,12 +78,12 @@ const signUp = async (
         );
         const sendEmail = new EmailService(req.body.email, otp.toString());
         await sendEmail.sendEmail();
-        res.status(201).send({ message: "success" });
+
         userQueue.add(
           { email: req.body.email, type: req.body.type, otp: otp.toString() },
           { delay: 180000, attempts: 5 }
         );
-        return;
+        return res.status(201).send({ message: "success" });
       }
       errorMessage = `${
         type === "Clients" ? "Client" : "Organizer"

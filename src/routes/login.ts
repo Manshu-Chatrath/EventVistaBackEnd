@@ -171,7 +171,7 @@ router.post("/refreshToken", async (req: Request, res: Response) => {
     const { refreshToken, id } = req.body;
 
     const isValidToken = verifyToken(refreshToken);
-    console.log("So is valid token is ", isValidToken);
+
     if (isValidToken) {
       if (req.body.type === "client") {
         const client = await Clients.findOne({

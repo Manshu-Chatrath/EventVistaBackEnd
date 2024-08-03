@@ -426,7 +426,7 @@ export class ChatService {
           {
             id: {
               [Op.in]: Sequelize.literal(
-                `(SELECT eventId FROM Clients_has_Events WHERE clientId = ${userId})`
+                `(SELECT eventId FROM clients_has_events WHERE clientId = ${userId})`
               ),
             },
             title: {
@@ -452,7 +452,7 @@ export class ChatService {
           {
             id: {
               [Op.in]: Sequelize.literal(
-                `(SELECT eventId FROM Clients_has_Events WHERE clientId = ${userId})`
+                `(SELECT eventId FROM clients_has_events WHERE clientId = ${userId})`
               ),
             },
             title: {

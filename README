@@ -1,0 +1,78 @@
+# Event Vista Backend
+
+This is the backend server for the Event Vista application. It provides APIs and services to support event management, AI features, and user interactions.
+
+## Features
+
+- **Event Management**: Create, update, and delete events with details like name, description, and location.
+- **AI Integration**: Use AI for event poster analysis and automatic detail extraction.
+- **User Management**: Authenticate users and manage user data securely.
+- **Notification System**: Send real-time notifications to clients and organizers.
+- **Chat Functionality**: Support chat rooms for event participants.
+
+## Prerequisites
+
+- **Node.js**: Ensure you have Node.js version 18.x.x or later installed.
+- **MySQL**: A running MySQL database instance is required.
+- **Redis**: A Redis instance is used for queueing and caching.
+
+## Installation
+
+1. **Clone the Repository**:
+   git clone https://github.com/Manshu-Chatrath/EventVistaBackEnd
+   cd eventvista-backend
+
+2. **Install Dependencies**:
+   npm install
+
+3. **Create a `.env` File**:
+
+   Create a `.env` file in the root directory of the project and add the following environment variables:
+   SECRET_KEY=your_secret_key
+   REDIS_URL=redis://localhost:6379
+   MYSQL_USER=your_mysql_user
+   MYSQL_PASSWORD=your_mysql_password
+   MYSQL_HOST=localhost
+   MYSQL_PORT=3306
+   MYSQL_DATABASE=eventvista
+   EMAIL_PASSWORD=your_email_password
+   AWS_ACCESS_KEY=your_aws_access_key
+   AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
+   OPEN_AI_KEY=your_openai_key
+   GOOGLE_PRIVATE_KEY=your_google_private_key
+   GOOGLE_CLIENT_ID=your_google_client_id
+   GOOGLE_KEY=your_google_key
+
+4. **Configure Database**:
+
+   Ensure your MySQL database is set up with the appropriate schema. You can use Sequelize to migrate the database schema by running:
+   npx sequelize-cli db:migrate
+
+5. **Start the Server**:
+   npm start
+
+## Key Technologies
+
+- **Express**: Web framework for Node.js.
+- **Sequelize**: ORM for managing database interactions with MySQL.
+- **Bull**: Job queueing for handling background tasks.
+- **Redis**: In-memory data structure store for caching and message brokering.
+- **Tesseract.js**: Optical character recognition for extracting text from images.
+- **AWS SDK**: Interacting with AWS services like S3 for storage.
+- **OpenAI API**: AI capabilities for natural language processing and image analysis.
+
+## API Endpoints
+
+The API provides various endpoints for managing events, users, and more. Here are some key endpoints:
+
+- **POST** `/api/events`: Create a new event.
+- **GET** `/api/events`: Retrieve a list of events.
+- **PUT** `/api/events/:id`: Update event details.
+- **DELETE** `/api/events/:id`: Delete an event.
+- **POST** `/api/users/login`: Authenticate a user.
+- **GET** `/api/notifications`: Retrieve notifications for a user.
+
+## Security
+
+- **JWT Authentication**: Securely authenticate users using JSON Web Tokens.
+- **Environment Variables**: Keep sensitive data like API keys and passwords in the `.env` file.
